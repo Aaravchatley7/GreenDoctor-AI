@@ -1,0 +1,11 @@
+.env
+.venv/
+__pycache__/
+*.pyc
+.DS_Store
+DATASET/
+models/*.pth
+logs/
+reports/*.png
+frontend/node_modules/
+frontend/dist/

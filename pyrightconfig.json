@@ -1,0 +1,21 @@
+{
+  "venvPath": "/Users/parthsharma/Desktop/XAI PDS",
+  "venv": ".venv",
+  "pythonVersion": "3.14",
+  "include": [
+    "."
+  ],
+  "extraPaths": [
+    "/Users/parthsharma/Desktop/XAI PDS/.venv/lib/python3.14/site-packages",
+    "/Users/parthsharma/Desktop/XAI PDS"
+  ],
+  "executionEnvironments": [
+    {
+      "root": ".",
+      "extraPaths": [
+        "/Users/parthsharma/Desktop/XAI PDS/.venv/lib/python3.14/site-packages",
+        "/Users/parthsharma/Desktop/XAI PDS"
+      ]
+    }
+  ]
+}

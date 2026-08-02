@@ -1,0 +1,10 @@
+{
+  "python.defaultInterpreterPath": "/Users/parthsharma/Desktop/XAI PDS/.venv/bin/python",
+  "python.analysis.extraPaths": [
+    "/Users/parthsharma/Desktop/XAI PDS",
+    "/Users/parthsharma/Desktop/XAI PDS/.venv/lib/python3.14/site-packages"
+  ],
+  "python.analysis.indexing": true,
+  "python.analysis.typeCheckingMode": "basic",
+  "git.ignoreLimitWarning": true
+}
