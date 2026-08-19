@@ -1,11 +1,14 @@
 """Visualizer utility for Explainable AI Plant Disease Detection.
 
-Overlays Grad-CAM heatmaps onto original leaf images and encodes output visualizations.
+Provides heatmap overlay, base64 encoding, and batch encoding utilities
+for all XAI attribution methods: Grad-CAM, Grad-CAM++, Vanilla Saliency,
+SmoothGrad, Integrated Gradients, SHAP, and LIME.
 """
 
 import base64
 import io
 import logging
+from typing import Any
 
 import cv2
 import numpy as np
@@ -65,3 +68,61 @@ def encode_image_to_base64(image: Image.Image) -> str:
     image.save(buffer, format="PNG")
     b64_str = base64.b64encode(buffer.getvalue()).decode("utf-8")
     return f"data:image/png;base64,{b64_str}"
+
+
+def encode_all_heatmaps(
+    original_image: Image.Image,
+    heatmaps: dict[str, np.ndarray | None],
+    alpha: float = 0.5,
+    colormap: int = cv2.COLORMAP_JET,
+) -> dict[str, Any]:
+    """Batch-overlays and base64-encodes a dictionary of named heatmaps.
+
+    Reduces boilerplate in API routes by handling the overlay → encode pipeline
+    for all XAI methods in a single call.
+
+    Args:
+        original_image: Original PIL leaf image.
+        heatmaps: Mapping of XAI method name → 2D np.ndarray heatmap (or None to skip).
+        alpha: Heatmap overlay transparency (0.0 = invisible, 1.0 = opaque).
+        colormap: OpenCV colormap constant for heatmap colouring.
+
+    Returns:
+        dict[str, str | None]: Mapping of method name → base64 PNG data URL,
+        or None if the corresponding heatmap was None.
+
+    Example:
+        >>> results = encode_all_heatmaps(
+        ...     original_image=pil_img,
+        ...     heatmaps={
+        ...         "gradcam": gradcam_np,
+        ...         "gradcam_pp": gradcam_pp_np,
+        ...         "saliency": saliency_np,
+        ...         "smoothgrad": smoothgrad_np,
+        ...         "ig": ig_np,
+        ...         "shap": shap_np,
+        ...         "lime": None,  # skipped — not requested
+        ...     },
+        ... )
+    """
+    encoded: dict[str, Any] = {}
+    for method_name, heatmap in heatmaps.items():
+        if heatmap is None:
+            encoded[method_name] = None
+            continue
+        try:
+            overlay = overlay_heatmap_on_image(
+                original_image=original_image,
+                heatmap=heatmap,
+                alpha=alpha,
+                colormap=colormap,
+            )
+            encoded[method_name] = encode_image_to_base64(overlay)
+        except Exception:
+            logger.exception(
+                "Failed to encode heatmap for method '%s'. Returning None.",
+                method_name,
+            )
+            encoded[method_name] = None
+
+    return encoded

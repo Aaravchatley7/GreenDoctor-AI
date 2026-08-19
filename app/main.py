@@ -25,15 +25,22 @@ logger = logging.getLogger("app.main")
 @asynccontextmanager
 async def lifespan(app: FastAPI):
     """Preloads trained model weights and metadata on application startup."""
-    logger.info("Initializing XAI Plant Disease Detection Backend Service...")
+    logger.info(
+        "Initializing PhytoShield AI — 7-method XAI Plant Disease Detection Backend..."
+    )
     load_model_and_metadata()
     yield
 
 
 app = FastAPI(
-    title="Explainable AI Plant Disease Detection API",
-    description="API for detecting plant diseases using EfficientNet-B0 with Grad-CAM explainability and Groq LLM clinical advice.",
-    version="1.0.0",
+    title="PhytoShield AI — Explainable Plant Disease Detection API",
+    description=(
+        "Plant disease classification with a 7-method XAI attribution engine: "
+        "Grad-CAM, Grad-CAM++, Vanilla Saliency, SmoothGrad, "
+        "Integrated Gradients, SHAP Occlusion, and LIME. "
+        "Powered by EfficientNet-B0 (99.48% accuracy) + Groq LLM pathology reports."
+    ),
+    version="2.0.0",
     lifespan=lifespan,
 )
 

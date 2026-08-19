@@ -4,6 +4,7 @@ import { Leaf, ArrowRight, Printer, Sun, Moon } from 'lucide-react';
 import HomePage from './pages/Home';
 import AnalyzePage from './pages/Analyze';
 import ModelPage from './pages/Model';
+import AmbientBackground from './components/AmbientBackground';
 
 const API_BASE = 'http://localhost:8000/api';
 
@@ -144,14 +145,15 @@ function AppInner() {
   const showPrint = location.pathname === '/analyze';
 
   return (
-    <div style={{ display: 'flex', flexDirection: 'column', minHeight: '100vh' }}>
+    <div style={{ display: 'flex', flexDirection: 'column', minHeight: '100vh', position: 'relative' }}>
+      <AmbientBackground />
       <Nav
         apiOnline={apiOnline}
         showPrint={showPrint}
         theme={theme}
         onToggleTheme={toggleTheme}
       />
-      <main style={{ flex: 1 }}>
+      <main style={{ flex: 1, position: 'relative', zIndex: 1 }}>
         <Routes>
           <Route path="/"        element={<HomePage />} />
           <Route path="/analyze" element={<AnalyzePage apiBase={API_BASE} />} />
