@@ -1,4 +1,4 @@
-# 🌿 PhytoShield AI — Explainable Plant Disease Detection System
+# 🌿 GreenDoctor AI — Explainable Plant Disease Detection System
 
 [![Python 3.12+](https://img.shields.io/badge/Python-3.12%2B-blue.svg)](https://www.python.org/)
 [![FastAPI](https://img.shields.io/badge/Backend-FastAPI-009688.svg)](https://fastapi.tiangolo.com/)
@@ -7,7 +7,7 @@
 [![Accuracy](https://img.shields.io/badge/Test%20Accuracy-99.48%25-00b87c.svg)](#metrics)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
 
-**PhytoShield AI** is a research-grade, production-ready Explainable AI (XAI) Plant Pathology Intelligence System. It identifies crop diseases from leaf photography with **99.48% accuracy** across 15 agricultural classes, providing multi-modal visual attribution heatmaps (**Grad-CAM**, **Integrated Gradients**, **SHAP**) alongside **Groq LLM** visual feature explanations.
+**GreenDoctor AI** is a research-grade, production-ready Explainable AI (XAI) Plant Pathology Intelligence System. It identifies crop diseases from leaf photography with **99.48% accuracy** across 15 agricultural classes, providing multi-modal visual attribution heatmaps (**Grad-CAM**, **Integrated Gradients**, **SHAP**) alongside **Groq LLM** visual feature explanations.
 
 ---
 
@@ -30,7 +30,7 @@
 ## 📁 Repository Structure
 
 ```
-PhytoShield-AI/
+GreenDoctor-AI/
 ├── api/                    # FastAPI routes and Pydantic schemas
 ├── app/                    # Main FastAPI app & Groq LLM explainer service
 │   ├── main.py
@@ -71,8 +71,8 @@ PhytoShield-AI/
 
 ```bash
 # Clone repository
-git clone https://github.com/parthsharma8368/PhytoShield-AI.git
-cd PhytoShield-AI
+git clone https://github.com/Aaravchatley7/GreenDoctor-AI.git
+cd GreenDoctor-AI
 
 # Create and activate virtual environment
 python3 -m venv .venv
